@@ -1,79 +1,75 @@
-﻿/*
-Каждый врач имеет метод «лечить», но каждый врач лечит по-своему.
-*/
-
-List<Doctor> doctors = new List<Doctor>()
-{
-    new Doctor("Вася", "хирург"),
-    new Doctor("Петя", "терапевт"),
-    new Doctor("Катя", "дантист")
-};
-
+﻿
 List<Patient> patients = new List<Patient>()
 {
-    new Patient("Маша"),
-    new Patient("Света", new CurePlan("1")),
-    new Patient("Игорь")
+    new Patient(),
+    new Patient(new CurePlan("1")),
+    new Patient(new CurePlan("5"))
 };
 
-public class Person
+for (int i = 0; i < patients.Count; i++)
 {
-    public string Name { get; }
-
-    public Person(string name)
-    {
-        Name = name;
-    }
+    Console.Write($"Пациент номер {i + 1}: ");
+    patients[i].SetDoctor();
 }
 
-public class Doctor : Person
+public class Doctor
 {
-    public string? Post { get; }
+    private readonly string _post;
 
-    public Doctor(string name) : base(name)
-    { }
-    public Doctor(string name, string post): base(name) 
+    public Doctor(string post)
     {
-        Post = post;
+        _post = post;
     }
 
-    public void Cure() { }
+    public string Cure() => _post switch
+    {
+        "хирург" => "делаем операцию",
+        "терапевт" => "пьем таблетки",
+        "дантист" => "чистим зубы",
+        _ => "Вы здоровы!"
+    };
 }
 
-public class Patient : Person
+public class Patient
 {
     public CurePlan? Plan { get; set; }
 
-    public Doctor? Doctor { get; set; }
-    public Patient(string name) : base(name) { }
-    public Patient(string name, CurePlan plan) : this(name) 
+    private Doctor? _doctor;
+
+    public Patient() { }
+
+    public Patient(CurePlan plan)
     {
         Plan = plan;
-    }
-    public Patient(string name, CurePlan plan, Doctor doctor) : this(name, plan)
-    {
-        Doctor = doctor;
     }
 
     public void SetDoctor()
     {
-        Doctor = Plan.Description switch
+        if (Plan == null)
         {
-            "1" => new Doctor("Вася", "хирург"),
-            "2" => new Doctor("Вася", "дантист"),
-            _ => new Doctor("Катя", "терапевт")
+            Console.WriteLine("Невозможно назначить врача, т.к. нет плана лечения");
+            return;
+        }
+
+        _doctor = Plan.GetDescription() switch
+        {
+            "1" => new Doctor("хирург"),
+            "2" => new Doctor("дантист"),
+            _ => new Doctor("терапевт")
         };
 
-        Doctor.Cure();
+        Console.WriteLine(_doctor.Cure());
     }
 }
 
 public class CurePlan
 {
-    public string Description { get; set; }
+    private string _description;
 
     public CurePlan(string description)
     {
-        Description = description;
+        _description = description;
     }
+
+    public string GetDescription() => _description;
 }

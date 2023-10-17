@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Numerics;
 using System.Reflection;
 
-List<Phone> phones = new List<Phone>() 
-{ 
-    new Phone("+375291234567","Apple", 11.1), 
-    new Phone("+375299876543", "Samsung", 22.2), 
-    new Phone("+375295437861", "Xiaomi", 33.3) 
+List<Phone> phones = new List<Phone>()
+{
+    new Phone("+375291234567","Apple", 11.1),
+    new Phone("+375299876543", "Samsung", 22.2),
+    new Phone("+375295437861", "Xiaomi", 33.3)
 };
 
 foreach (Phone phone in phones)
@@ -29,8 +29,8 @@ public class Phone
     public string Model { get; }
     public double Weight { get; }
 
-    public Phone() 
-    { 
+    public Phone()
+    {
         Number = "+375290000000";
         Model = "неизвестно";
         Weight = 0.0;
@@ -51,7 +51,7 @@ public class Phone
 
     public void ReceiveCall(string name, string number) => Console.WriteLine($"Звонит {name} Номер {number}");
 
-    public string GetNumber() => Number ?? "нет номера"; 
+    public string GetNumber() => Number ?? "нет номера";
 
     public void SendMessage(params string[] numbers)
     {
