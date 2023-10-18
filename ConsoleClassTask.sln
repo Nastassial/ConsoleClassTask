@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleClassTask1", "Consol
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleClassTask2", "ConsoleClassTask2\ConsoleClassTask2.csproj", "{B972DC77-406C-4BB1-821C-31E17FCE4A87}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkingWithStrings", "..\WorkingWithStrings\WorkingWithStrings\WorkingWithStrings.csproj", "{4FD79F42-BF8F-4968-BEB6-77E1DABEAEBF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkingWithStrings", "WorkingWithStrings\WorkingWithStrings.csproj", "{CA0E928E-5299-4F6A-858D-F12CE4DB12B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{B972DC77-406C-4BB1-821C-31E17FCE4A87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B972DC77-406C-4BB1-821C-31E17FCE4A87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B972DC77-406C-4BB1-821C-31E17FCE4A87}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4FD79F42-BF8F-4968-BEB6-77E1DABEAEBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4FD79F42-BF8F-4968-BEB6-77E1DABEAEBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4FD79F42-BF8F-4968-BEB6-77E1DABEAEBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4FD79F42-BF8F-4968-BEB6-77E1DABEAEBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA0E928E-5299-4F6A-858D-F12CE4DB12B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA0E928E-5299-4F6A-858D-F12CE4DB12B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA0E928E-5299-4F6A-858D-F12CE4DB12B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA0E928E-5299-4F6A-858D-F12CE4DB12B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

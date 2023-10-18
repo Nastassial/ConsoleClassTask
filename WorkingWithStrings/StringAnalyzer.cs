@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Metrics;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
+﻿using System.Text;
 
 namespace WorkingWithStrings
 {
@@ -23,6 +16,8 @@ namespace WorkingWithStrings
 
     internal class StringAnalyzer
     {
+        private string str;
+
         public StringAnalyzer(IInputProvider inputProvider)
         {
             str = inputProvider.Read();
@@ -71,50 +66,35 @@ namespace WorkingWithStrings
         {
             StringBuilder stringBuilder = new StringBuilder(str);
 
-            for (int i = 0; i < stringBuilder.Length; i++)
+            string[] numbers = new string[] { "ноль", "один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять" };
+
+            for (int i = 0; i < numbers.Length; i++)
             {
-                if (char.IsNumber(stringBuilder[i]))
-                {
-                    var temp = NumberConverter(stringBuilder[i]);
-                    stringBuilder.Remove(i, 1);
-                    stringBuilder.Insert(i, temp);
-                }
+                stringBuilder.Replace(i.ToString(), numbers[i].ToUpper());
             }
 
             return stringBuilder.ToString();
         }
 
         //Вывести на экран сначала вопросительные, а затем восклицательные предложения
-        public List<string> QuestionSentences()
+        public List<string> GetSentences(char separator)
         {
-            List<string> questionS = new List<string>();
-            int lastPosition = 0;
-            for (int i = 0;i < str.Length;i++)
-            {
-                if(CheckSentenceSeparators(str[i]))
-                {
-                    var result = str.Substring(lastPosition, (i-lastPosition)+1);
-                    lastPosition = i+1;
-                    if (result.Last() == '?') questionS.Add(result);
-                }
-            }
-            return questionS;
-        }
+            List<string> sentences = new List<string>();
 
-        public List<string> ExclamationSentences()
-        {
-            List<string> exclamationS = new List<string>();
             int lastPosition = 0;
+            
             for (int i = 0; i < str.Length; i++)
             {
                 if (CheckSentenceSeparators(str[i]))
                 {
-                    var result = str.Substring(lastPosition, (i - lastPosition) + 1);
+                    var result = str.Substring(lastPosition, i - lastPosition + 1);
+
                     lastPosition = i + 1;
-                    if (result.Last() == '!') exclamationS.Add(result);
+
+                    if (result.Last() == separator) sentences.Add(result);
                 }
             }
-            return exclamationS;
+            return sentences;
         }
 
 
@@ -150,32 +130,12 @@ namespace WorkingWithStrings
         private bool CheckSentenceSeparators(char symbol) 
         {
             char[] separators = { '.', '!', '?' };
-            foreach (char c in separators) 
-            {
-                if(symbol == c) return true;
-            }
-            return false;
 
+            return separators.Contains(symbol);
         }
-
-        private string NumberConverter(char number) => number switch
-        {
-            '0' => "НОЛЬ",
-            '1' => "ОДИН",
-            '2' => "ДВА",
-            '3' => "ТРИ",
-            '4' => "ЧЕТЫРЕ",
-            '5' => "ПЯТЬ",
-            '6' => "ШЕСТЬ",
-            '7' => "СЕМЬ",
-            '8' => "ВОСЕМЬ",
-            '9' => "ДЕВЯТЬ",
-            _ => "ERR"
-        };
 
         private int NumberOfOccurrences(ref string[] arrStr, in string maxLengthWord)
         {
-
             int counter = 0;
 
             foreach (var word in arrStr)
@@ -189,15 +149,14 @@ namespace WorkingWithStrings
         private int DigitCount(in string word)
         {
             int counter = 0;
+
             foreach (var item in word)
             {
                 if (char.IsDigit(item)) counter++;
             }
+
             return counter;
         }
-
-
-        private string str;
     }
 }
 
